@@ -139,7 +139,7 @@
     </div>
 
     <!-- Background Music -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic">
         <source src="valentine_song.mp3" type="audio/mpeg">
     </audio>
 
@@ -160,9 +160,9 @@
         document.getElementById("openBtn").addEventListener("click", function() {
             this.style.display = "none"; 
 
-            // Start Music Fix
-            music.volume = 4.0; 
-            music.play();
+            // **Music Fix Applied** 🔊
+            music.volume = 0.5; // Medium Volume
+            music.play().catch(error => console.log("Music autoplay blocked, user interaction required."));
 
             // Show Heading with Animation
             let valentineText = document.getElementById("valentineText");
@@ -185,11 +185,7 @@ SACH BOLUN TOH MUJHE BADE BADE SHABDON KI ZAROORAT NAHI HAI TUJHE APNI FEELINGS 
 
 MAIN JAANTA HOON, KABHI TU OVERTHINK KARTI HAI, KABHI MOOD SWINGS AATE HAIN, AUR KABHI TERE MANN MEIN AJEEB AJEEB SAWAAL UTHTE HAIN. PAR TU BAS YEH YAAD RAKHNA, CHAAHE KUCH BHI HO JAYE, MAIN YAHIN HOON—HAMESHA. HAATH PAKDA HAI TOH KABHI CHHODUNGA NAHI, BAS TERI TARAF BHI GRIP LOOSE NAHI HONI CHAHIYE.  
 
-TERE BINA BHI LIFE CHALTI RAHEGI, PAR TU HAI TOH SAB KUCH ZYADA BEHTAR LAGTA HAI. TERI HASSI, TERE NAKHRE, TERI BAATEIN—SAB KUCH.  
-
-ISLIYE BAS ITNA HI KAHUNGA,  
-HAPPY VALENTINE'S DAY, MERI OVERTHINKING QUEEN. ❤️  
-TU TENSION MAT LE, MAIN ABHI BHI YAHIN HOON, AUR HAMESHA RAHUNGA.`;
+HAPPY VALENTINE'S DAY, MERI OVERTHINKING QUEEN ❤️`;
 
                     let j = 0;
                     let speed = 50;
