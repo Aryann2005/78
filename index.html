@@ -100,11 +100,16 @@
 
     <div class="stamp" id="stamp">OGGY</div>
 
-    <audio id="bgMusic" autoplay>
-        <source src="valentine_music.mp3" type="audio/mp3">
+    <audio id="bgMusic" autoplay loop>
+        <source src="my_love_tone.mp3" type="audio/mp3">
     </audio>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let audio = document.getElementById("bgMusic");
+            audio.play().catch(error => console.log("Autoplay blocked, user interaction required!"));
+        });
+
         let text = `Ayushi,
         
         Sach bolun toh mujhe bade bade shabdon ki zaroorat nahi hai tujhe apni feelings batane ke liye. 
@@ -121,11 +126,6 @@
         Tu tension mat le, main abhi bhi yahin hoon, aur hamesha rahunga.`;
 
         function openLetter() {
-            let audio = document.getElementById("bgMusic");
-            if (audio.paused) {
-                audio.play();
-            }
-
             let letter = document.getElementById("letter");
             letter.style.display = "block";
 
