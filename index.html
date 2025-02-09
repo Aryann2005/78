@@ -3,218 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Wish for Ayushi</title>
+    <title>Valentine's Surprise</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Calibre:wght@700&display=swap');
-
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: pink;
+            background-color: #ffebeb;
+            text-align: center;
             font-family: 'Calibre', sans-serif;
             overflow: hidden;
-            flex-direction: column;
-            position: relative;
         }
 
-        .container {
-            text-align: center;
-            position: relative;
-        }
-
-        button {
-            font-size: 18px;
-            padding: 12px 20px;
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Valentine Text Typing */
-        .valentine-text {
+        #valentineMessage {
             font-size: 28px;
             font-weight: bold;
-            color: gold;
-            text-shadow: 3px 3px 5px red;
+            color: #ff0066;
             position: absolute;
-            top: 15%;
-            text-align: center;
-            width: 100%;
-            font-family: 'Calibre', sans-serif;
-            opacity: 0;
-            animation: bounceIn 1s ease-in-out forwards;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounceIn 1s forwards;
         }
 
         @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { top: -50px; opacity: 0; }
+            50% { top: 30px; opacity: 1; }
+            100% { top: 10px; }
         }
 
-        /* Envelope */
         .envelope {
-            width: 260px;
-            height: 160px;
-            background: #ff4d4d;
-            position: relative;
-            border-radius: 10px;
-            transition: transform 2s ease-in-out;
-        }
-
-        .envelope.open {
-            transform: translateY(-120px);
-        }
-
-        /* Letter */
-        .letter {
-            width: 260px;
-            height: 0;
-            background: #f7e5b9;
             position: absolute;
-            top: 0;
-            transition: height 3s ease-in-out;
-            overflow-y: auto;
-            border-radius: 5px;
-            padding: 15px;
-            text-align: left;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            font-size: 14px;
-            line-height: 1.6;
-            text-transform: uppercase;
-            color: #ff69b4; /* Baby Pink */
-        }
-
-        .letter.open {
-            height: 400px;
-        }
-
-        /* Stamp */
-        .stamp {
-            font-size: 24px;
-            color: yellow;
-            font-weight: bold;
-            opacity: 0;
-            position: absolute;
-            top: 50%;
+            top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-shadow: 0 0 5px yellow, 0 0 15px yellow;
-            border: 2px solid yellow;
-            border-radius: 50%;
-            padding: 8px 16px;
+            width: 200px;
+            height: 150px;
+            background: #ff3366;
+            border-radius: 10px;
+            cursor: pointer;
         }
 
-        /* Music Icon */
-        .music {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: red;
+        .letter {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 250px;
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            overflow-y: auto;
+            text-align: left;
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .stamp {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            font-weight: bold;
+            color: yellow;
+            border: 2px solid yellow;
+            padding: 5px;
+            display: none;
+            animation: glow 1s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px yellow; }
+            to { text-shadow: 0 0 15px yellow; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button id="openBtn">Open 💌</button>
-        <div class="valentine-text hidden" id="valentineText">
-            HAPPY VALENTINE'S DAY💖 MY <br> LOVIEE CUTIEE PARTNER
-        </div>
 
-        <div class="envelope hidden" id="envelope">
-            <div class="letter" id="letter">
-                <p id="letterText"></p>
-            </div>
-        </div>
-        <p class="stamp hidden">OGGY ❤️</p>
+    <h1 id="valentineMessage">HAPPY VALENTINE'S DAY💖 MY <br> LOVIEE CUTIEE PARTNER</h1>
+
+    <div class="envelope" onclick="openLetter()">📩 Open</div>
+
+    <div class="letter" id="letter">
+        <p id="letterText"></p>
     </div>
 
-    <!-- Background Music -->
-    <audio id="bgMusic">
-        <source src="valentine_song.mp3" type="audio/mpeg">
-    </audio>
+    <div class="stamp" id="stamp">OGGY</div>
 
-    <!-- Music Icon -->
-    <div class="music" onclick="toggleMusic()">🎵</div>
+    <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
 
     <script>
-        let music = document.getElementById("bgMusic");
+        let text = `Ayushi,
+        
+        Sach bolun toh mujhe bade bade shabdon ki zaroorat nahi hai tujhe apni feelings batane ke liye. 
+        Tu meri life ka ek aisa hissa hai jo bina kisi dikhave ke, bina kisi zabardasti ke, bas apni jagah bana chuka hai.
 
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
+        Main jaanta hoon, kabhi tu overthink karti hai, kabhi mood swings aate hain, aur kabhi tere mann mein ajeeb ajeeb sawaal uthte hain. 
+        Par tu bas yeh yaad rakhna, chahe kuch bhi ho jaye, main yahin hoon—hamesha. Haath pakda hai toh kabhi chhodunga nahi, 
+        bas teri taraf bhi grip loose nahi honi chahiye.
+
+        Tere bina bhi life chalti rahegi, par tu hai toh sab kuch zyada behtar lagta hai. 
+        Teri hassi, tere nakhre, teri baatein—sab kuch.
+
+        Isliye bas itna hi kahunga, Happy Valentine's Day, meri overthinking queen. 
+        Tu tension mat le, main abhi bhi yahin hoon, aur hamesha rahunga.`;
+
+        function openLetter() {
+            document.getElementById("bgMusic").play();
+            let letter = document.getElementById("letter");
+            letter.style.display = "block";
+
+            let i = 0;
+            let interval = setInterval(() => {
+                if (i < text.length) {
+                    document.getElementById("letterText").innerHTML += text[i];
+                    i++;
+                    letter.scrollTop = letter.scrollHeight;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(closeLetter, 3000);
+                }
+            }, 50);
         }
 
-        document.getElementById("openBtn").addEventListener("click", function() {
-            this.style.display = "none"; 
-
-            // **Music Fix Applied** 🔊
-            music.volume = 0.5; // Medium Volume
-            music.play().catch(error => console.log("Music autoplay blocked, user interaction required."));
-
-            // Show Heading with Animation
-            let valentineText = document.getElementById("valentineText");
-            valentineText.classList.remove("hidden");
-
-            setTimeout(() => {
-                valentineText.classList.add("hidden");
-
-                let envelope = document.getElementById("envelope");
-                envelope.classList.remove("hidden");
-                envelope.classList.add("open");
-
-                let letter = document.getElementById("letter");
-                setTimeout(() => {
-                    letter.classList.add("open");
-
-                    let message = `AYUSHI,  
-
-SACH BOLUN TOH MUJHE BADE BADE SHABDON KI ZAROORAT NAHI HAI TUJHE APNI FEELINGS BATANE KE LIYE. TU MERI LIFE KA EK AISA HISSA HAI JO BINA KISI DIKHAVE KE, BINA KISI ZABARDASTI KE, BAS APNI JAGAH BANA CHUKA HAI.  
-
-MAIN JAANTA HOON, KABHI TU OVERTHINK KARTI HAI, KABHI MOOD SWINGS AATE HAIN, AUR KABHI TERE MANN MEIN AJEEB AJEEB SAWAAL UTHTE HAIN. PAR TU BAS YEH YAAD RAKHNA, CHAAHE KUCH BHI HO JAYE, MAIN YAHIN HOON—HAMESHA. HAATH PAKDA HAI TOH KABHI CHHODUNGA NAHI, BAS TERI TARAF BHI GRIP LOOSE NAHI HONI CHAHIYE.  
-
-HAPPY VALENTINE'S DAY, MERI OVERTHINKING QUEEN ❤️`;
-
-                    let j = 0;
-                    let speed = 50;
-                    let letterText = document.getElementById("letterText");
-
-                    function typeWriter() {
-                        if (j < message.length) {
-                            letterText.innerHTML += message.charAt(j);
-                            letterText.scrollTop = letterText.scrollHeight;
-                            j++;
-                            setTimeout(typeWriter, speed);
-                        } else {
-                            setTimeout(() => {
-                                letter.classList.remove("open");
-                                envelope.classList.remove("open");
-
-                                setTimeout(() => {
-                                    let stamp = document.querySelector(".stamp");
-                                    stamp.style.opacity = "1";
-                                    stamp.classList.remove("hidden");
-                                }, 2000);
-                            }, 3000);
-                        }
-                    }
-
-                    typeWriter();
-                }, 2000);
-            }, 3000);
-        });
+        function closeLetter() {
+            document.getElementById("letter").style.display = "none";
+            document.getElementById("stamp").style.display = "block";
+        }
     </script>
+
 </body>
 </html>
