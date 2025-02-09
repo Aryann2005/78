@@ -101,7 +101,7 @@
     <div class="stamp" id="stamp">OGGY</div>
 
     <audio id="bgMusic" autoplay loop>
-        <source src="my_love_tone.mp3" type="audio/mp3">
+        <source src="sweet_romantic_tone.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -143,8 +143,14 @@
         }
 
         function closeLetter() {
-            document.getElementById("letter").style.display = "none";
-            document.getElementById("stamp").style.display = "block";
+            let letter = document.getElementById("letter");
+            letter.style.transform = "scaleY(0)";
+            setTimeout(() => {
+                letter.style.display = "none";
+                setTimeout(() => {
+                    document.getElementById("stamp").style.display = "block";
+                }, 2000);
+            }, 2000);
         }
     </script>
 
